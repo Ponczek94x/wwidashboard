@@ -22,8 +22,8 @@
             
         }
         #textbox {
-            position: absolute;
-            top: 20%;
+            /*position: absolute;*/
+            /*top: 20%;*/
             /*left: 20%;
             transform: translate(-50%, -50%);*/
             display: flex;
@@ -70,10 +70,9 @@
     <!--W poniższym divie możesz dorzucać nowy tekst do textboxa -->
 
     <div id="textbox">
-        <a> amogus </a>
         <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;"><a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
-<h3><a href="https://drive.google.com/file/d/1ybQwztJomql5P2kBU1fv50RwihyyLoTJ/view?usp=sharing">PLAN DNIA 17.08</a></h3>
-<a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
+        <h3><a href="https://drive.google.com/file/d/1ybQwztJomql5P2kBU1fv50RwihyyLoTJ/view?usp=sharing">PLAN DNIA 17.08</a></h3>
+        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
     </div>
 
 
@@ -130,13 +129,17 @@
     const stars = new THREE.Points(starGeometry, starMaterial);
 
     scene.add(stars);
+    let rotationz = 0;
+    let rotationy = 0;
 
+    let model;
     const loader = new GLTFLoader();
     loader.load(
         'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-red/source/Among%20US%20%5B%20Red%20%5D.glb',
         function (gltf) {
-            gltf.scene.position.set(0, 0, -5);
-            scene.add(gltf.scene);
+            gltf.scene.position.set(0, 0, -4);
+            model = gltf.scene;
+            scene.add(model);
         },
         undefined,
         function (error) {
@@ -149,8 +152,14 @@
         const lookX = Math.cos(angle);
         const lookZ = Math.sin(angle);
         camera.lookAt(lookX, 0, lookZ);
+        if(model){
+            model.rotation.y += 0.003;
+            model.rotation.z += 0.002;
+        }
+       
+
         renderer.render(scene, camera);
-        angle += 0.003;
+        angle += 0.001;
     }
 
     // Handle window resize only when it happens
