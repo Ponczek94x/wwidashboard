@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Basic</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: block;
+            pointer-events: none; /* optional, lets clicks go through */
+        }
+        #textbox {
+            position: absolute;
+            top: 20%;
+            /*left: 20%;
+            transform: translate(-50%, -50%);*/
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;
+            /*padding: 1vw 2vw;*/
+            background: transparent;
+            color: white;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            z-index: 10;
+            /*max-width: 100vw;*/
+            box-sizing: border-box;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #textbox h2, #textbox a, #textbox p {
+            margin: 5px 0;
+            padding: 0;
+            white-space: nowrap;
+            word-break: normal;
+        }
+        #textbox img {
+            max-width: 100%;
+            display: flex;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+            }
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+    <!--W poniższym divie możesz dorzucać nowy tekst do textboxa -->
+
+    <div id="textbox">
+        <a> amogus </a>
+        <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;">
+        <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
+        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
+    </div>
+
+
+
+<!-- Poniżej jest kod w Three.js -->
+<script type="module">      
+    import * as THREE from 'three';
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(w, h);
+    renderer.setClearColor(0x000000);
+    //renderer.setClearColor(0xffffff); // Set background color to white
+    renderer.shadowMap.enabled = true; // Enable shadows
+    document.body.appendChild(renderer.domElement);
+
+    const fov = 40;
+    const aspect = w / h;
+    const near = 0.1;
+    const far = 1000;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 0, 0);
+    camera.lookAt(0, 0, 0);
+    let angle = 0;
+
+    const scene = new THREE.Scene();
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 4, 1);
+    light.castShadow = true; // Enable shadow casting for the light
+    scene.add(light);
+
+
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 10000;
+    const starVertices = [];
+
+    for (let i = 0; i < starCount; i++) {
+    const x = (Math.random() - 0.5) * 2000;
+    const y = (Math.random() - 0.5) * 2000;
+    const z = (Math.random() - 0.5) * 2000;
+    starVertices.push(x, y, z);
+    }
+
+    starGeometry.setAttribute("position", new THREE.Float32BufferAttribute(starVertices, 3));
+
+    // Star material
+    const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
+    const stars = new THREE.Points(starGeometry, starMaterial);
+
+    scene.add(stars);
+
+
+    function animate() {
+        const lookX = Math.cos(angle);
+        const lookZ = Math.sin(angle);
+        camera.lookAt(lookX, 0, lookZ);
+        renderer.render(scene, camera);
+        angle += 0.003;
+    }
+
+    // Handle window resize only when it happens
+    window.addEventListener('resize', () => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+    });
+
+    renderer.setAnimationLoop(animate);
+
+</script>
+   
+</body>
+</html>
