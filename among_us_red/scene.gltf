@@ -121,7 +121,7 @@
   "buffers": [
     {
       "byteLength": 223776,
-      "uri": "scene.bin"
+      "uri": "https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among_us_red/scene.bin"
     }
   ],
   "extensionsRequired": [
@@ -132,10 +132,10 @@
   ],
   "images": [
     {
-      "uri": "textures/material_diffuse.png"
+      "uri": "https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among_us_red/textures/material_diffuse.png"
     },
     {
-      "uri": "textures/material_specularGlossiness.png"
+      "uri": "https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among_us_red/textures/material_specularGlossiness.png"
     }
   ],
   "materials": [
