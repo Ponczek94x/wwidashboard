@@ -10,13 +10,16 @@
             overflow: hidden;
         }
         canvas {
-            position: fixed;
+            /*position: fixed;*/
+            position: absolute;
             top: 0;
             left: 0;
             width: 100vw !important;
             height: 100vh !important;
             display: block;
             pointer-events: none; /* optional, lets clicks go through */
+            z-index: -10;
+            
         }
         #textbox {
             position: absolute;
@@ -62,15 +65,15 @@
 
 </head>
 
-<body>
+<div>
 
     <!--W poniższym divie możesz dorzucać nowy tekst do textboxa -->
 
     <div id="textbox">
         <a> amogus </a>
-        <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;">
-        <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
-        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
+        <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;"><a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
+<h3><a href="https://drive.google.com/file/d/1ybQwztJomql5P2kBU1fv50RwihyyLoTJ/view?usp=sharing">PLAN DNIA 17.08</a></h3>
+<a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
     </div>
 
 
@@ -78,15 +81,19 @@
 <!-- Poniżej jest kod w Three.js -->
 <script type="module">      
     import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+    // Replace 'your-div-id' with the actual ID or class of your target div
+    /*const container = document.getElementsByClassName('dashboard-message')[0];*/
+    const container = document.getElementById('container');
     const w = window.innerWidth;
     const h = window.innerHeight;
+
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(w, h);
     renderer.setClearColor(0x000000);
-    //renderer.setClearColor(0xffffff); // Set background color to white
-    renderer.shadowMap.enabled = true; // Enable shadows
-    document.body.appendChild(renderer.domElement);
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement); // Use the whole window
 
     const fov = 40;
     const aspect = w / h;
@@ -124,6 +131,19 @@
 
     scene.add(stars);
 
+    const loader = new GLTFLoader();
+    loader.load(
+        'https://threejs.org/examples/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf',
+        function (gltf) {
+            gltf.scene.position.set(0, 0, -5);
+            scene.add(gltf.scene);
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+
 
     function animate() {
         const lookX = Math.cos(angle);
@@ -145,6 +165,6 @@
     renderer.setAnimationLoop(animate);
 
 </script>
-   
-</body>
+
+</div>
 </html>
