@@ -71,8 +71,9 @@
 
     <div id="textbox">
         <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;"><a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
-        <h3><a href="https://drive.google.com/file/d/1ybQwztJomql5P2kBU1fv50RwihyyLoTJ/view?usp=sharing">PLAN DNIA 17.08</a></h3>
+        <h3><a href="https://drive.google.com/file/d/1Jjqs5IyrmcWopCWn9Q9y3WLMmmZLMdmg/view?usp=sharing">PLAN DNIA 18.08</a></h3>
         <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
+        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737961.png" width="539" height="98" alt="Są Drożdżówki!" /></a>
     </div>
 
 
@@ -112,13 +113,16 @@
 
 
     const starGeometry = new THREE.BufferGeometry();
-    const starCount = 10000;
+    const starCount = 20000;
     const starVertices = [];
 
     for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 2000;
     const y = (Math.random() - 0.5) * 2000;
     const z = (Math.random() - 0.5) * 2000;
+     if (Math.sqrt(x * x + y * y + z * z) < 100) {
+            continue; // Skip this star if it's too close
+        }
     starVertices.push(x, y, z);
     }
 
@@ -132,14 +136,22 @@
     let rotationz = 0;
     let rotationy = 0;
 
-    let model;
+    let model, model2;
     const loader = new GLTFLoader();
     loader.load(
         'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-red/source/Among%20US%20%5B%20Red%20%5D.glb',
         function (gltf) {
-            gltf.scene.position.set(0, 0, -4);
-            model = gltf.scene;
+            const original = gltf.scene;
+
+            // First copy
+            model = original.clone();
+            model.position.set(0, 0, 4);
             scene.add(model);
+
+            // Second copy
+            model2 = original.clone();
+            model2.position.set(0, 0, -4);
+            scene.add(model2);
         },
         undefined,
         function (error) {
@@ -148,13 +160,18 @@
     );
 
 
+
     function animate() {
         const lookX = Math.cos(angle);
         const lookZ = Math.sin(angle);
         camera.lookAt(lookX, 0, lookZ);
         if(model){
             model.rotation.y += 0.003;
-            model.rotation.z += 0.002;
+            model.rotation.z += 0.004;
+        }
+        if(model2){
+            model2.rotation.y += 0.005;
+            model2.rotation.x += 0.002;
         }
        
 
