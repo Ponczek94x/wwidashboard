@@ -82,6 +82,7 @@
 <script type="module">      
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    const loader = new GLTFLoader();
 
     // Replace 'your-div-id' with the actual ID or class of your target div
     /*const container = document.getElementsByClassName('dashboard-message')[0];*/
@@ -111,7 +112,7 @@
     light.castShadow = true; // Enable shadow casting for the light
     scene.add(light);
 
-
+    /*
     const starGeometry = new THREE.BufferGeometry();
     const starCount = 20000;
     const starVertices = [];
@@ -133,11 +134,54 @@
     const stars = new THREE.Points(starGeometry, starMaterial);
 
     scene.add(stars);
+
+    */
+
+    loader.load(
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-yellow/source/Among%20US%20%5B%20Yellow%20%5D.glb',
+        function (gltf) {
+            const original = gltf.scene;
+
+            // star copies
+            for (let i = 0; i < 10000; i++) {
+                const starModel = original.clone();
+                starModel.position.set(
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20
+                );
+
+                // Ensure the star is not too close to the camera
+                if ((starModel.position.x * starModel.position.x +
+                    starModel.position.y * starModel.position.y +
+                    starModel.position.z * starModel.position.z) < 3) {
+                    continue; // Skip this star if it's too close
+                }
+                // Set a random color for the star
+                const color = new THREE.Color(Math.random(), Math.random(), Math.random());
+
+                //set rotation
+                starModel.rotation.x = Math.random() * Math.PI;
+                starModel.rotation.y = Math.random() * Math.PI;
+                starModel.rotation.z = Math.random() * Math.PI;
+                starModel.scale.set(0.1, 0.1, 0.1);
+                scene.add(starModel);
+            }
+
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+    
+
+
     let rotationz = 0;
     let rotationy = 0;
 
-    let model, model2;
-    const loader = new GLTFLoader();
+    let model, model2, model3, model4;
+    
     loader.load(
         'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-red/source/Among%20US%20%5B%20Red%20%5D.glb',
         function (gltf) {
@@ -145,13 +189,64 @@
 
             // First copy
             model = original.clone();
-            model.position.set(0, 0, 4);
+            let cory = (Math.random()-0.5)*2;
+            model.position.set(0, cory, 4);
             scene.add(model);
+
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+
+    loader.load(
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-blue/source/Among%20US%20%5B%20Blue%20%5D.glb',
+        function (gltf) {
+            const original = gltf.scene;
 
             // Second copy
             model2 = original.clone();
-            model2.position.set(0, 0, -4);
+            let cory = (Math.random()-0.5)*2;
+            model2.position.set(2, cory, -4);
             scene.add(model2);
+
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+
+    loader.load(
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-yellow/source/Among%20US%20%5B%20Yellow%20%5D.glb',
+        function (gltf) {
+            const original = gltf.scene;
+
+            // Third copy
+            model3 = original.clone();
+            let cory = (Math.random()-0.5)*2;
+            model3.position.set(5, cory, 6);
+            scene.add(model3);
+
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+
+    loader.load(
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-green/source/Among%20US%20%5B%20Green%20%5D.glb',
+        function (gltf) {
+            const original = gltf.scene;
+
+            // Fourth copy
+            model4 = original.clone();
+            let cory = (Math.random()-0.5)*2;
+            model4.position.set(-4, cory, 0);
+            scene.add(model4);
+
         },
         undefined,
         function (error) {
@@ -172,6 +267,14 @@
         if(model2){
             model2.rotation.y += 0.005;
             model2.rotation.x += 0.002;
+        }
+        if(model3){
+            model3.rotation.x += 0.004;
+            model3.rotation.z += 0.003;
+        }
+        if(model4){
+            model4.rotation.y += 0.002;
+            model4.rotation.x += 0.001;
         }
        
 
