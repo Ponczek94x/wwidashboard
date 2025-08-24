@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +5,7 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            overflow: auto;
         }
         canvas {
             /*position: fixed;*/
@@ -68,11 +66,12 @@
 <div>
 
     <!--W poniższym divie możesz dorzucać nowy tekst do textboxa -->
-
+<iframe src="/static/wwi2025/schedule.html" 
+        style="width:100%; height: 750px; border:none;">
+</iframe>
     <div id="textbox">
         <h2> <a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a><br><p style="font-size:50%;"><a href=https://git.staszic.waw.pl/top/materialy/dla-uczestnikow/wwi-2025-grupa-2>MATERIAŁY NA GITLABIE</a></p></h2>
-        <h3><a href="https://drive.google.com/file/d/1Jjqs5IyrmcWopCWn9Q9y3WLMmmZLMdmg/view?usp=sharing">PLAN DNIA 18.08</a></h3>
-        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737845.gif" width="1329" height="113" alt="Konsultacje w zielonej świetlicy (do 22)" /></a>
+        <a href="https://cooltext.com"><img src="https://images.cooltext.com/5738231.gif" width="694" height="105" alt="Konsultacje w AULI" /></a>
         <a href="https://cooltext.com"><img src="https://images.cooltext.com/5737961.png" width="539" height="98" alt="Są Drożdżówki!" /></a>
     </div>
 
@@ -92,6 +91,7 @@
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(w, h);
+renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
     renderer.setClearColor(0x000000);
     renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement); // Use the whole window
@@ -112,7 +112,7 @@
     light.castShadow = true; // Enable shadow casting for the light
     scene.add(light);
 
-    /*
+    
     const starGeometry = new THREE.BufferGeometry();
     const starCount = 20000;
     const starVertices = [];
@@ -135,10 +135,12 @@
 
     scene.add(stars);
 
-    */
+    
 
+    //Amogus stars
+    /*
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-yellow/source/Among%20US%20%5B%20Yellow%20%5D.glb',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-white/source/Among%20US%20%5B%20White%20%5D.glb',
         function (gltf) {
             const original = gltf.scene;
 
@@ -146,15 +148,15 @@
             for (let i = 0; i < 10000; i++) {
                 const starModel = original.clone();
                 starModel.position.set(
-                    (Math.random() - 0.5) * 20,
-                    (Math.random() - 0.5) * 20,
-                    (Math.random() - 0.5) * 20
+                    (Math.random() - 0.5) * 200,
+                    (Math.random() - 0.5) * 200,
+                    (Math.random() - 0.5) * 200
                 );
 
                 // Ensure the star is not too close to the camera
                 if ((starModel.position.x * starModel.position.x +
                     starModel.position.y * starModel.position.y +
-                    starModel.position.z * starModel.position.z) < 3) {
+                    starModel.position.z * starModel.position.z) < 30) {
                     continue; // Skip this star if it's too close
                 }
                 // Set a random color for the star
@@ -164,7 +166,7 @@
                 starModel.rotation.x = Math.random() * Math.PI;
                 starModel.rotation.y = Math.random() * Math.PI;
                 starModel.rotation.z = Math.random() * Math.PI;
-                starModel.scale.set(0.1, 0.1, 0.1);
+                //starModel.scale.set(0.1, 0.1, 0.1);
                 scene.add(starModel);
             }
 
@@ -174,7 +176,7 @@
             console.error('Error loading model:', error);
         }
     );
-    
+    */
 
 
     let rotationz = 0;
@@ -296,4 +298,3 @@
 </script>
 
 </div>
-</html>
