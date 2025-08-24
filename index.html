@@ -185,14 +185,15 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
     let model, model2, model3, model4;
     
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-red/source/Among%20US%20%5B%20Red%20%5D.glb',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/tralalero_tralala.glb',
         function (gltf) {
             const original = gltf.scene;
 
             // First copy
             model = original.clone();
             let cory = (Math.random()-0.5)*2;
-            model.position.set(0, cory, 4);
+            model.position.set(-10, cory, -10);
+            model.scale.set(0.2, 0.2, 0.2);
             scene.add(model);
 
         },
@@ -203,14 +204,15 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
     );
 
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-blue/source/Among%20US%20%5B%20Blue%20%5D.glb',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/chimpanzini_bananini.glb',
         function (gltf) {
             const original = gltf.scene;
 
             // Second copy
             model2 = original.clone();
             let cory = (Math.random()-0.5)*2;
-            model2.position.set(2, cory, -4);
+            model2.position.set(6, cory, -7);
+            //model2.scale.set(0.1, 0.1, 0.1);
             scene.add(model2);
 
         },
@@ -221,13 +223,14 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
     );
 
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-yellow/source/Among%20US%20%5B%20Yellow%20%5D.glb',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/tung_tung_tung_sahur.glb',
         function (gltf) {
             const original = gltf.scene;
 
             // Third copy
             model3 = original.clone();
             let cory = (Math.random()-0.5)*2;
+            model3.scale.set(0.2, 0.2, 0.2);
             model3.position.set(5, cory, 6);
             scene.add(model3);
 
@@ -237,16 +240,16 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             console.error('Error loading model:', error);
         }
     );
-
+/*
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/among-us-green/source/Among%20US%20%5B%20Green%20%5D.glb',
+        //'',
         function (gltf) {
             const original = gltf.scene;
 
             // Fourth copy
             model4 = original.clone();
             let cory = (Math.random()-0.5)*2;
-            model4.position.set(-4, cory, 0);
+            model4.position.set(-124, cory, 0);
             scene.add(model4);
 
         },
@@ -255,7 +258,7 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             console.error('Error loading model:', error);
         }
     );
-
+*/
 
 
     function animate() {
@@ -297,4 +300,4 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
 
 </script>
 
-</div>
+</div>  
