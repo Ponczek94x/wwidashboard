@@ -240,16 +240,16 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             console.error('Error loading model:', error);
         }
     );
-/*
+
     loader.load(
-        //'',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/bombardiro_crocodilo.glb',
         function (gltf) {
             const original = gltf.scene;
 
             // Fourth copy
             model4 = original.clone();
             let cory = (Math.random()-0.5)*2;
-            model4.position.set(-124, cory, 0);
+            model4.position.set(-4, cory, 0);
             scene.add(model4);
 
         },
@@ -258,7 +258,27 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             console.error('Error loading model:', error);
         }
     );
-*/
+
+    
+    loader.load(
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/ballerina_cappuccina.glb',
+        function (gltf) {
+            const original = gltf.scene;
+
+            // Fourth copy
+            model5 = original.clone();
+            let cory = (Math.random()-0.5)*2;
+            model5.position.set(-1, cory, 1);
+            scene.add(model5);
+
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading model:', error);
+        }
+    );
+
+
 
 
     function animate() {
@@ -281,6 +301,13 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             model4.rotation.y += 0.002;
             model4.rotation.x += 0.001;
         }
+        
+        /*
+        if(model5){
+            model5.rotation.y += 0.008;
+            model5.rotation.x += 0.002;
+            model5.rotation.z += 0.003;
+        }*/
        
 
         renderer.render(scene, camera);
