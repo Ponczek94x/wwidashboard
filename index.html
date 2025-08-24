@@ -76,6 +76,25 @@
     </div>
 
 
+<script>
+(function () {
+  const SRC = "https://static.wikitide.net/italianbrainrotwiki/2/21/Tung_Tung_Tung_Sahur_Audio.wav";
+
+  const audio = new Audio(SRC);
+  audio.preload = "auto";
+
+  function unlockAudio(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    audio.play().catch(err => console.log("Autoplay blocked:", err));
+
+    document.removeEventListener("click", unlockAudio, true);
+  }
+
+  document.addEventListener("click", unlockAudio, true);
+})();
+</script>
 
 <!-- Poniżej jest kod w Three.js -->
 <script type="module">      
@@ -261,11 +280,11 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
 
     
     loader.load(
-        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/ballerina_cappuccina.glb',
+        'https://raw.githubusercontent.com/Ponczek94x/wwidashboard/main/brainrot/ballerina_cappucina.glb',
         function (gltf) {
             const original = gltf.scene;
 
-            // Fourth copy
+            // Fifth copy
             model5 = original.clone();
             let cory = (Math.random()-0.5)*2;
             model5.position.set(-1, cory, 1);
@@ -277,7 +296,6 @@ renderer.domElement.style.position = 'fixed';  // stay fixed while scrolling
             console.error('Error loading model:', error);
         }
     );
-
 
 
 
